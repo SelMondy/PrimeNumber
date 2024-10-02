@@ -1,0 +1,44 @@
+﻿@using PrimeNumber
+@model List<PrimeNumberModel>
+@{
+    Layout = "_Layout";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Check Prime Number</h5>
+        <form method="post" action="@Url.Action(PrimeNumberController.ActionCheckPrime, PrimeNumberController.Name)">
+            <label for="number">Enter a number:</label>
+            <input type="number" name="number" required />
+            <button type="submit">Check</button>
+        </form>
+    </div>
+</div>
+<hr>
+<div class="card mt-5">
+    <div class="card-body">
+        <h5 class="card-title tex">Result Prime Number</h5>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">ตัวเลขที่ต้องการเช็ค</th>
+                    <th scope="col">จำนวนเฉพาะ</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int itemNo = 0;
+                }
+                @foreach (var result in Model)
+                {
+                    <tr>
+                        <th class="text-center">@(++itemNo)</th>
+                        <td class="text-center">@result.Number</td>
+                        <td class="text-center">@(result.IsPrime ? "เป็นจำนวนเฉพาะ" : "ไม่เป็นจำนวนเฉพาะ")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
